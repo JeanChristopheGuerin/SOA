@@ -1,0 +1,55 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.alma.groupe10</groupId>
+  <artifactId>Boutique</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Boutique</name>
+  <description>Projet SOA</description>
+  
+  <build>
+   <plugins>
+  	<plugin>
+	    <groupId>org.apache.maven.plugins</groupId>
+	    <artifactId>maven-site-plugin</artifactId>
+	    <version>3.2</version>
+	    <configuration>
+	      <outputEncoding>UTF-8</outputEncoding>
+	    </configuration>
+  	</plugin>
+  	    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.3</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+      
+       <plugin>
+        <groupId>org.sonarsource.scanner.maven</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <version>3.1.1</version>
+      </plugin>
+  </plugins> 
+  </build>
+  		
+  <modules>
+  	<module>Application</module>
+  	<module>Domain</module>
+  	<module>API</module>
+  	<module>Infrastructure</module>
+  	<module>Presentation</module>
+  </modules>
+  
+  <dependencies>
+      <dependency>
+         <groupId>junit</groupId>
+         <artifactId>junit</artifactId>
+         <version>3.8.1</version>
+         <scope>test</scope>
+      </dependency>
+  </dependencies>  
+ 
+</project>
