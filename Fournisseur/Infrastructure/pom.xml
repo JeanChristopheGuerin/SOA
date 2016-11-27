@@ -6,4 +6,14 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>Infrastructure</artifactId>
+  
+   <dependencies>
+      <dependency>
+         <groupId>com.alma.groupe10</groupId>
+         <artifactId>API</artifactId>
+         <version>0.0.1-SNAPSHOT</version>
+         <scope>compile</scope>
+      </dependency>
+      
+  </dependencies>
 </project>

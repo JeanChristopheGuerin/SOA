@@ -1,7 +1,7 @@
 package entities;
 
 
-public class Produit{
+public class Product{
 	
 	protected String name;
 	protected String description;
