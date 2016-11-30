@@ -7,8 +7,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import entities.Product;
+import entities.ProductSheet;
+import entities.Supplier;
+import infraInterface.CRUDI;
 
-public class DataBase {
+public class DataBase implements CRUDI  {
 	Connection conn;
 	
 	public static void main(String[] args) throws SQLException {
@@ -17,7 +20,7 @@ public class DataBase {
 	    app.connectionToDerby();
 	    app.normalDbUsage();
 	 }
-	public void connectionToDerby() throws SQLException {
+	private void connectionToDerby() throws SQLException {
 	    // -------------------------------------------
 	    // URL format is
 	    // jdbc:derby:<local directory to save data>
@@ -26,16 +29,16 @@ public class DataBase {
 	    conn = DriverManager.getConnection(dbUrl);
 	}
 	
-	public void createTables() throws SQLException {
+	private void createTables() throws SQLException {
 		Statement stmt = conn.createStatement();
 		// create table
-	    stmt.executeUpdate("Create table PRODUCT (id int primary key, name varchar(30),idDescription int REFERENCES DESCRIPTION (idDescription))");
-	    stmt.executeUpdate("Create table SUPPLIER ()");
-	    stmt.executeUpdate("Create table DESCRIPTION ()");
+	    stmt.executeUpdate("Create table PRODUCT (idProduct int IDENTITY(1,1) primary key, name varchar(50),idDescription int REFERENCES DESCRIPTION (idDescription), idSupplier int REFERENCES DESCRIPTION (idSupplier)");
+	    stmt.executeUpdate("Create table SUPPLIER (idSupplier int IDENTITY(1,1) primary key, name varchar(50) )");
+	    stmt.executeUpdate("Create table DESCRIPTION (idDescription int IDENTITY(1,1) primary key, DescritionText varchar(255) )");
 
 	}
 	
-	public void dropTables() throws SQLException{
+	private void dropTables() throws SQLException{
 		Statement stmt = conn.createStatement();
 		// drop table
 	    stmt.executeUpdate("Drop Table PRODUCT");
@@ -43,13 +46,27 @@ public class DataBase {
 	    stmt.executeUpdate("Drop Table DESCRIPTION");
 	}
 	
-	public void addSupplier(){
+	public void addSupplier(Supplier s) throws SQLException{
+		Statement stmt = conn.createStatement();
+		stmt.executeUpdate("insert into SUPPLIER values("+s.getName()+")");
 		
 	}
 	public void addProduct(Product p) throws SQLException{
 		Statement stmt = conn.createStatement();
-		stmt.executeUpdate("insert into PRODUCT values (1,'tom')");
-	    stmt.executeUpdate("insert into users values (2,'peter')");
+		
+		ResultSet rs = stmt.executeQuery("SELECT idDescription FROM DESCRIPTION WHERE name ="+p.getDescription().getDescriptionText());
+		
+		if(rs.next() != false){
+			int idDescription = rs.getInt(0);
+			stmt.executeUpdate("insert into PRODUCT values ("+p.getName()+","+idDescription+")");
+		}else{
+			
+			//stmt.executeUpdate("insert into PRODUCT values ("+p.getName()+","+,'tom')");
+		}
+		/*stmt.executeUpdate("insert into PRODUCT values ("+p.getName()+","+,'tom')");
+	    stmt.executeUpdate("insert into users values (2,'peter')");*/
+		
+		
 	}
 	
 	public void addDescrition(){
@@ -73,4 +90,20 @@ public class DataBase {
 	      System.out.printf("%d\t%s\n", rs.getInt("id"), rs.getString("name"));
 	    }
 	}
+	@Override
+	public void addDescription(ProductSheet d) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	
+	public Product findProduct(String name){
+		 Statement stmt = conn.createStatement();
+		  stmt.executeQuery("SELECT name FROM Product WHERE name ='"+name+"'");
+		 
+		  
+	 }
+	
+	
 }

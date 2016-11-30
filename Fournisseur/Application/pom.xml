@@ -7,4 +7,27 @@
   </parent>
   <artifactId>Application</artifactId>
   <name>Application</name>
+  
+  <dependencies>
+  <dependency>
+         <groupId>com.alma.groupe10</groupId>
+         <artifactId>API</artifactId>
+         <version>0.0.1-SNAPSHOT</version>
+         <scope>compile</scope>
+      </dependency>
+      
+      <dependency>
+         <groupId>com.alma.groupe10</groupId>
+         <artifactId>Domain</artifactId>
+         <version>0.0.1-SNAPSHOT</version>
+         <scope>compile</scope>
+      </dependency>
+      
+       <dependency>
+         <groupId>com.alma.groupe10</groupId>
+         <artifactId>Infrastructure</artifactId>
+         <version>0.0.1-SNAPSHOT</version>
+         <scope>compile</scope>
+      </dependency>
+  </dependencies>
 </project>
