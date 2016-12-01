@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * <p>Classe Java pour anonymous complex type.
  * 
- * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
+ * <p>Le fragment de schema suivant indique le contenu attendu figurant dans cette classe.
  * 
  * <pre>
  * &lt;complexType>
@@ -45,7 +45,7 @@ public class ConversionRate {
     protected Currency toCurrency;
 
     /**
-     * Obtient la valeur de la propriété fromCurrency.
+     * Obtient la valeur de la proprietefromCurrency.
      * 
      * @return
      *     possible object is
@@ -57,7 +57,7 @@ public class ConversionRate {
     }
 
     /**
-     * Définit la valeur de la propriété fromCurrency.
+     * Definit la valeur de la propriete fromCurrency.
      * 
      * @param value
      *     allowed object is
@@ -69,7 +69,7 @@ public class ConversionRate {
     }
 
     /**
-     * Obtient la valeur de la propriété toCurrency.
+     * Obtient la valeur de la proprietetoCurrency.
      * 
      * @return
      *     possible object is
@@ -81,7 +81,7 @@ public class ConversionRate {
     }
 
     /**
-     * Définit la valeur de la propriété toCurrency.
+     * Definit la valeur de la propriete toCurrency.
      * 
      * @param value
      *     allowed object is
