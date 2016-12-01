@@ -2,8 +2,9 @@ package serviceMethod;
 
 import java.util.List;
 
+import javax.jws.WebMethod;
 import javax.jws.WebService;
-import javax.xml.bind.annotation.XmlType;
+
 
 import entities.Product;
 import methodService.methodService;
@@ -16,12 +17,12 @@ public class ServiceExpoImpl implements ServiceExpo {
 	public ServiceExpoImpl(){
 		m = new methodService();
 	}
-
+	@WebMethod(operationName = "sendProduct")
 	@Override
 	public Product sendProduct(String name) {
 		return m.sendProductByName(name);
 	}
-
+	@WebMethod(operationName = "sendProduct")
 	@Override
 	public List<Product> sendProducts(List<String> names) {
 		return m.sendProductsByName(names);

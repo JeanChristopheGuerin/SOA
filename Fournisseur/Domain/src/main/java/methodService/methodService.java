@@ -8,13 +8,14 @@ import entities.Product;
 import serviceMethodInterface.serviceInterface;
 
 public class methodService implements serviceInterface {
-
+	
 	@Override
 	public Product sendProductByName(String name) {
 		
 		DataBase db = new DataBase();
 		try {
 			db.connectDB();
+			db.createTables();
 			return db.findProduct(name);
 			
 		} catch (SQLException e) {
@@ -29,6 +30,7 @@ public class methodService implements serviceInterface {
 		DataBase db = new DataBase();
 		try {
 			db.connectDB();
+			db.createTables();
 			return db.findProducts(names);
 			
 		} catch (SQLException e) {

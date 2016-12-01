@@ -6,6 +6,9 @@ public class ProductSheet {
 	
 	protected String descriptionText;
 	
+	public ProductSheet() {
+		descriptionText = "";
+	}
 
 	public ProductSheet(String description) {
 		descriptionText = description;
