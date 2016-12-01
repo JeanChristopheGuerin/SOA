@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * <p>Classe Java pour anonymous complex type.
  * 
- * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
+ * <p>Le fragment de schema suivant indique le contenu attendu figurant dans cette classe.
  * 
  * <pre>
  * &lt;complexType>
@@ -38,7 +38,7 @@ public class ConversionRateResponse {
     protected double conversionRateResult;
 
     /**
-     * Obtient la valeur de la propriété conversionRateResult.
+     * Obtient la valeur de la propriete conversionRateResult.
      * 
      */
     public double getConversionRateResult() {
@@ -46,7 +46,7 @@ public class ConversionRateResponse {
     }
 
     /**
-     * Définit la valeur de la propriété conversionRateResult.
+     * Definit la valeur de la propriete conversionRateResult.
      * 
      */
     public void setConversionRateResult(double value) {
