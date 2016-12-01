@@ -5,7 +5,7 @@ import entities.ProductSheet;
 import entities.Supplier;
 import infraInterface.FactoryI;
 
-public class CreateInstanceBoutique implements FactoryI {
+public class  CreateInstanceBoutique implements FactoryI {
 
 	@Override
 	public Product createProduct(String name, ProductSheet desc, float price) {
@@ -26,5 +26,9 @@ public class CreateInstanceBoutique implements FactoryI {
 	public Product createProduct(String name, String desc, float price) {
 		return new Product(name,new ProductSheet(desc),price);
 	}
-
+	
+	@Override
+	public Product createProduct(String name, float price) {
+		return new Product(name,price);
+	}
 }

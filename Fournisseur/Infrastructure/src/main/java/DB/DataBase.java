@@ -5,29 +5,40 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import entities.Product;
 import entities.ProductSheet;
 import entities.Supplier;
 import infraInterface.CRUDI;
+import infraInterface.SearchDBEntities;
+import factoryImpl.CreateInstanceBoutique;
 
-public class DataBase implements CRUDI  {
+public class DataBase implements CRUDI, SearchDBEntities {
 	Connection conn;
+	public DataBase() {
+		
+	    
+	}
 	
-	public static void main(String[] args) throws SQLException {
-		DataBase app = new DataBase();
-	 
-	    app.connectionToDerby();
-	    app.normalDbUsage();
-	 }
-	private void connectionToDerby() throws SQLException {
-	    // -------------------------------------------
+	public void connectDB(String dbUrl) throws SQLException{
+		// -------------------------------------------
 	    // URL format is
 	    // jdbc:derby:<local directory to save data>
 	    // -------------------------------------------
-	    String dbUrl = "jdbc:derby:bddSupplier;create=true";
-	    conn = DriverManager.getConnection(dbUrl);
+		conn = DriverManager.getConnection(dbUrl);
 	}
+	
+	public void connectDB() throws SQLException{
+		// -------------------------------------------
+	    // URL format is
+	    // jdbc:derby:<local directory to save data>
+	    // -------------------------------------------
+		conn = DriverManager.getConnection("jdbc:derby:bddSupplier;create=true");
+	}
+	
+	
 	
 	private void createTables() throws SQLException {
 		Statement stmt = conn.createStatement();
@@ -72,24 +83,6 @@ public class DataBase implements CRUDI  {
 	public void addDescrition(){
 		
 	}
-	public void normalDbUsage() throws SQLException {
-		Statement stmt = conn.createStatement();
-	 
-	    
-	 
-	    
-	 
-	    // insert 2 rows
-	    
-	 
-	    // query
-	    ResultSet rs = stmt.executeQuery("SELECT * FROM users");
-	 
-	    // print out query result
-	    while (rs.next()) { 
-	      System.out.printf("%d\t%s\n", rs.getInt("id"), rs.getString("name"));
-	    }
-	}
 	@Override
 	public void addDescription(ProductSheet d) {
 		// TODO Auto-generated method stub
@@ -97,13 +90,35 @@ public class DataBase implements CRUDI  {
 	}
 	
 	
-	
-	public Product findProduct(String name){
-		 Statement stmt = conn.createStatement();
-		  stmt.executeQuery("SELECT name FROM Product WHERE name ='"+name+"'");
+	@Override
+	public Product findProduct(String name) throws SQLException{
+		CreateInstanceBoutique factory = new CreateInstanceBoutique(); 
+		Statement stmt = conn.createStatement();
+		 ResultSet res = stmt.executeQuery("SELECT name,price FROM Product WHERE name ='"+name+"'");
+		 if(res.next() != false){
+			return factory.createProduct(res.getObject(0).toString(),Float.parseFloat(res.getObject(1).toString())); 
+		 }
 		 
-		  
-	 }
+		 
+		 return null; 
+	}
+	@Override
+	public List<Product> findProducts(List<String> names) throws SQLException{
+		Statement stmt = conn.createStatement();
+		List<Product> res = new ArrayList<Product>();
+		ResultSet resultset;
+		CreateInstanceBoutique factory = new CreateInstanceBoutique();
+		
+		for (String each : names){
+			resultset = stmt.executeQuery("SELECT name,price FROM Product WHERE name ='"+each+"'");
+			if(resultset.next() != false){
+				res.add(factory.createProduct(resultset.getObject(0).toString(),Float.parseFloat(resultset.getObject(1).toString()))); 
+			 }
+		}
+		return res;
+	}
+
+	
 	
 	
 }

@@ -19,6 +19,13 @@ public interface FactoryI {
 	 * @return Product : instance of the class Product
 	 * */
 	public Product createProduct(String name, ProductSheet desc, float price);
+	/**
+	 * Create a product without description
+	 * 
+	 * @param name : name of the product
+	 * @param price : price of the product
+	 * */
+	public Product createProduct(String name, float price);
 	
 	/**
 	 * 
@@ -35,4 +42,6 @@ public interface FactoryI {
 	 * @return ProductSheet : instance of the class ProductSheet
 	 * */
 	public ProductSheet createProductSheet(String description);
+	
+	
 }
