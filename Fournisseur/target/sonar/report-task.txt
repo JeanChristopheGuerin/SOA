@@ -1,0 +1,5 @@
+projectKey=com.alma.groupe10:Boutique
+serverUrl=https://sonarqube.com
+dashboardUrl=https://sonarqube.com/dashboard/index/com.alma.groupe10:Boutique
+ceTaskId=AVi7WYf7IidNYr2d5MBr
+ceTaskUrl=https://sonarqube.com/api/ce/task?id=AVi7WYf7IidNYr2d5MBr
