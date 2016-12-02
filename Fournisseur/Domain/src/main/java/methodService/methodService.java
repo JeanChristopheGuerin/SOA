@@ -39,7 +39,6 @@ public class methodService implements serviceInterface {
 	public List<Product> sendProductsByName(List<String> names) {
 		
 		try {
-			;
 			return db.findProducts(names);
 			
 		} catch (SQLException e) {
