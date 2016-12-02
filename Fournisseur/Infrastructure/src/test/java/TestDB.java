@@ -18,7 +18,7 @@ public class TestDB {
         List<Product> res2 = db.findProducts(Arrays.asList("a","b","c"));
         System.out.println(res.getName());
         for(Product each : res2){
-        	System.out.println(each.getDescription());
+        	System.out.println(each.getDescription().getDescriptionText());
         }
     }
 }

@@ -153,7 +153,7 @@ public class DataBase implements CRUDI, SearchDBEntities {
 	public Product findProduct(String name) throws SQLException{
 		
 		Statement stmt = conn.createStatement();
-		 ResultSet res = stmt.executeQuery("SELECT name,price,descriptiontext FROM Product NATURAL JOIN DESCRIPTION WHERE name ='"+name+"'");
+		 ResultSet res = stmt.executeQuery("SELECT PRODUCT.name,PRODUCT.price,DESCRIPTION.DescriptionText FROM Product NATURAL JOIN DESCRIPTION WHERE name ='"+name+"' AND PRODUCT.idDescription=DESCRIPTION.idDescription");
 		 if(res.next()){
 			return factory.createProduct(res.getObject(1).toString(),res.getString(3),res.getFloat(2)); 
 		 }
@@ -168,7 +168,7 @@ public class DataBase implements CRUDI, SearchDBEntities {
 		ResultSet resultset;
 				
 		for (String each : names){
-			resultset = stmt.executeQuery("SELECT name,price FROM Product WHERE name ='"+each+"'");
+			resultset = stmt.executeQuery("SELECT PRODUCT.name,PRODUCT.price,DESCRIPTION.DescriptionText FROM Product NATURAL JOIN DESCRIPTION WHERE name ='"+each+"' AND PRODUCT.idDescription=DESCRIPTION.idDescription");
 			if(resultset.next() != false){
 				res.add(factory.createProduct(resultset.getString(1),resultset.getString(3),resultset.getFloat(2))); 
 			 }
