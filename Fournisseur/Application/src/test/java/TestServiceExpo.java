@@ -12,7 +12,7 @@ public class TestServiceExpo {
 	public void testSendproduct(){
 		ServiceExpo s = new ServiceExpoImpl();
 		Product p1 = s.sendProduct("a");
-		assert p1.getDescription().getDescriptionText()=="a";
+		assert p1.getName()=="a";
 		System.out.println(p1.getDescription().getDescriptionText());
 	}
 	
