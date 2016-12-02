@@ -1,5 +1,10 @@
 package entities;
 
+/**
+ * Class wich represents a description of the product
+ * 
+ * */
+
 public class ProductSheet {
 	
 	/*protected String productName;*/

@@ -1,5 +1,8 @@
 package entities;
-
+/**
+ * Class unused which represents the supplier
+ * 
+ * */
 public class Supplier {
 
 	private String name;

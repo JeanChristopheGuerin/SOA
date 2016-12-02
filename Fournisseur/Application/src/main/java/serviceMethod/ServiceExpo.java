@@ -21,4 +21,7 @@ public interface ServiceExpo {
 
 	@WebMethod(operationName = "sendProducts")
 	public  @WebResult(name = "Product") List<Product> sendProducts(@WebParam(name = "nameProducts") List<String> names);
+	
+	@WebMethod(operationName = "sendAllProducts")
+	public @WebResult(name = "Product") List<Product> sendAllProducts();
 }

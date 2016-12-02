@@ -22,10 +22,15 @@ public class ServiceExpoImpl implements ServiceExpo {
 	public Product sendProduct(String name) {
 		return m.sendProductByName(name);
 	}
-	@WebMethod(operationName = "sendProduct")
+	@WebMethod(operationName = "sendProducts")
 	@Override
 	public List<Product> sendProducts(List<String> names) {
 		return m.sendProductsByName(names);
+	}
+	@WebMethod(operationName = "sendAllProducts")
+	@Override
+	public List<Product> sendAllProducts() {
+		return m.sendAllProducts();
 	}
 	
 	

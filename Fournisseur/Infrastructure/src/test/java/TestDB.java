@@ -1,4 +1,6 @@
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -13,7 +15,10 @@ public class TestDB {
         db.createTables();
         
         Product res = db.findProduct("a");
+        List<Product> res2 = db.findProducts(Arrays.asList("a","b","c"));
         System.out.println(res.getName());
-        
+        for(Product each : res2){
+        	System.out.println(each.getDescription());
+        }
     }
 }

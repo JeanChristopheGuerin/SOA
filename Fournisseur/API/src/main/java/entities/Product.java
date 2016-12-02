@@ -1,5 +1,9 @@
 package entities;
 
+/**
+ * Class wich represents the product in the DB
+ * 
+ * */
 
 public class Product{
 	

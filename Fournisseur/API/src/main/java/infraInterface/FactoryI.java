@@ -1,5 +1,10 @@
 package infraInterface;
 import entities.*;
+/**
+ * Factory Interface of the different Class in the project
+ * 
+ * */
+
 public interface FactoryI {
 	/**
 	 * 
