@@ -27,9 +27,7 @@ public class DataBase implements CRUDI, SearchDBEntities {
 		factory  = new CreateInstanceBoutique();
 	    
 	}
-	public void finalize() throws SQLException{
-		this.conn.close();
-	}
+	
 	/**
 	 * Method which create a connection with the database (or create one if it doesn't exit)
 	 * 
