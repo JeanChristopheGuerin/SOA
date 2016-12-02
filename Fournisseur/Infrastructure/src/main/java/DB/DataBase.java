@@ -27,6 +27,9 @@ public class DataBase implements CRUDI, SearchDBEntities {
 		factory  = new CreateInstanceBoutique();
 	    
 	}
+	public void finalize() throws SQLException{
+		this.conn.close();
+	}
 	/**
 	 * Method which create a connection with the database (or create one if it doesn't exit)
 	 * 
@@ -60,10 +63,11 @@ public class DataBase implements CRUDI, SearchDBEntities {
 	 * 
 	 * */
 	public void createTables() throws SQLException {
-		Statement stmt = conn.createStatement();
+		
 		
 		//drop table before 
 		this.dropTables();
+		Statement stmt = conn.createStatement();
 		// create table
 	    stmt.executeUpdate("Create table SUPPLIER (idSupplier INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1) PRIMARY KEY, name varchar(50) )");
 	    stmt.executeUpdate("Create table DESCRIPTION (idDescription INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1) PRIMARY KEY, DescriptionText varchar(255) )");
@@ -76,6 +80,7 @@ public class DataBase implements CRUDI, SearchDBEntities {
 	    addProduct(factory.createProduct("b", "description de choses et d'autres", 1));
 	    addProduct(factory.createProduct("c", "produit excellent", 190));
 	    addProduct(factory.createProduct("d", "produit excellentissime", 1900));
+	    stmt.close();
 	}
 	/**
 	 * Method which drop the tables Product, Supplier and Description 
@@ -98,9 +103,10 @@ public class DataBase implements CRUDI, SearchDBEntities {
 		res = conn.getMetaData().getTables(null, "APP", "DESCRIPTION".toUpperCase(), null);
 		if(res.next()){
 			stmt.executeUpdate("Drop Table DESCRIPTION");
+			
 		}
-		
-	  
+		res.close();
+		stmt.close();
 	}
 	/**
 	 * Method unused which can permit to add a Supplier
@@ -112,6 +118,7 @@ public class DataBase implements CRUDI, SearchDBEntities {
 		Statement stmt = conn.createStatement();
 		stmt.executeUpdate("insert into SUPPLIER values("+s.getName()+")");
 		
+		stmt.close();
 	}
 	
 	/**
@@ -138,7 +145,8 @@ public class DataBase implements CRUDI, SearchDBEntities {
 		}
 		/*stmt.executeUpdate("insert into PRODUCT values ("+p.getName()+","+,'tom')");
 	    stmt.executeUpdate("insert into users values (2,'peter')");*/
-		
+		rs.close();
+		stmt.close();
 		
 	}
 	
@@ -155,10 +163,11 @@ public class DataBase implements CRUDI, SearchDBEntities {
 		Statement stmt = conn.createStatement();
 		 ResultSet res = stmt.executeQuery("SELECT PRODUCT.name,PRODUCT.price,DESCRIPTION.DescriptionText FROM Product NATURAL JOIN DESCRIPTION WHERE name ='"+name+"' AND PRODUCT.idDescription=DESCRIPTION.idDescription");
 		 if(res.next()){
+			
 			return factory.createProduct(res.getObject(1).toString(),res.getString(3),res.getFloat(2)); 
 		 }
-		 
-		 
+		 stmt.close();
+		 res.close();
 		 return null; 
 	}
 	@Override
@@ -170,16 +179,18 @@ public class DataBase implements CRUDI, SearchDBEntities {
 		for (String each : names){
 			resultset = stmt.executeQuery("SELECT PRODUCT.name,PRODUCT.price,DESCRIPTION.DescriptionText FROM Product NATURAL JOIN DESCRIPTION WHERE name ='"+each+"' AND PRODUCT.idDescription=DESCRIPTION.idDescription");
 			if(resultset.next() != false){
+				
 				res.add(factory.createProduct(resultset.getString(1),resultset.getString(3),resultset.getFloat(2))); 
 			 }
 		}
+		stmt.close();
 		return res;
 	}
 
 
 	@Override
 	public List<Product> findAllProducts() throws SQLException {
-List<Product> lp = new ArrayList<Product>();
+		List<Product> lp = new ArrayList<Product>();
 		
 		Statement stmt = conn.createStatement();
 		ResultSet res = stmt.executeQuery("SELECT PRODUCT.name,PRODUCT.price,DESCRIPTION.DescriptionText FROM PRODUCT NATURAL JOIN DESCRIPTION ");
@@ -187,6 +198,8 @@ List<Product> lp = new ArrayList<Product>();
 		while(res.next()){
 			lp.add(factory.createProduct(res.getString(1),res.getString(3),res.getFloat(2)));
 		}
+		stmt.close();
+		res.close();
 		return lp;
 	}
 	
